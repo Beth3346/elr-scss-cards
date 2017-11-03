@@ -1,0 +1,242 @@
+// scss-lint:disable NestingDepth
+// Cards
+
+@mixin elr-card($config: ()) {
+    $config: extend((
+        bg-color: $main-color,
+        color: $background-color,
+        border-color: null,
+        padding: 0,
+        margin: 0,
+        border-radius: 0
+    ), $config);
+
+    $bg-color: map-get($config, bg-color);
+    $color: map-get($config, color);
+    $border-color: map-get($config, border-color);
+    $padding: map-get($config, padding);
+    $margin: map-get($config, margin);
+    $border-radius: map-get($config, border-radius);
+
+    background-color: $bg-color;
+    color: $color;
+    max-width: 100%;
+    height: auto;
+    margin: to-rems($margin);
+
+    @if $border-radius {
+        border-radius: $border-radius;
+    }
+
+    @if $border-color {
+        border: 1px solid $border-color;
+    }
+
+    .elr-card-inner {
+        justify-content: space-between;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .elr-card-title {
+        font-size: to-rems(24px);
+        color: $color;
+        font-weight: $bold;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color .3s;
+
+            &:hover {
+                color: lighten($color, 10%);
+            }
+        }
+    }
+
+    .elr-card-subtitle {
+        font-size: to-rems(12px);
+        color: lighten($color, 10%);
+        padding: 0 0 10px;
+    }
+
+    figure { width: 100%; }
+
+    p {
+        font-size: to-rems(14px);
+        color: $color;
+    }
+
+    ul { @include elr-unstyled-list; }
+
+    li {
+        font-size: to-rems(14px);
+        padding: to-rems(5px) 0;
+    }
+
+    .elr-card-list-label {
+        font-size: 110%;
+        font-weight: $bold;
+        padding-right: to-rems(5px);
+    }
+
+    .elr-button {
+        @include elr-clearfix;
+        font-size: to-rems(14px);
+    }
+
+    .elr-header-content {
+        padding: to-rems($padding);
+        padding-bottom: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .elr-card-header {
+
+        figure {
+            margin-top: 0;
+        }
+
+        @if $border-radius {
+            .elr-card-full-image {
+                padding-top: 0;
+            }
+
+            .elr-card-full-image,
+            .elr-card-full-image img {
+                border-radius: $border-radius $border-radius 0 0;
+            }
+        }
+    }
+
+    .elr-card-body {
+        clear: both;
+        flex-grow: 2;
+    }
+
+    .elr-card-body,
+    .elr-card-footer {
+        @include elr-clearfix;
+
+        figure {
+            margin: to-rems(20px);
+            width: auto;
+
+            &.elr-card-full-image {
+                margin: 0 0 -6px;
+            }
+        }
+    }
+
+    .elr-card-footer {
+        @include elr-clearfix;
+        padding: to-rems(20px) 0 0;
+        border-top: 1px solid darken($bg-color, 10%);
+
+        @if $border-radius {
+            .elr-card-full-image,
+            .elr-card-full-image img {
+                border-radius: 0 0 $border-radius $border-radius;
+            }
+        }
+    }
+
+    .elr-card-actions {
+        margin-left: to-rems(20px);
+        margin-right: to-rems(20px);
+        margin-bottom: to-rems(10px);
+        display: flex;
+        justify-content: space-between;
+        flex: 1;
+
+        .elr-button,
+        form {
+            width: 50%;
+            display: inline-block;
+            flex-basis: 0;
+            flex-grow: 1;
+            flex-shrink: 1;
+            margin-right: to-rems(10px);
+
+            &:nth-child(even) {
+                margin-right: 0;
+                margin-left: to-rems(10px);
+            }
+
+            &:only-of-type {
+                margin-left: 0;
+                margin-right: 0;
+                max-width: to-rems(200px);
+            }
+        };
+
+        form [type="submit"] {
+            width: 100%;
+        }
+    }
+
+    .elr-card-content {
+        padding: to-rems(10px) to-rems(20px);
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .elr-card-full-image {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+@mixin elr-card-thumbnail($config: ()) {
+    $config: extend((
+        round: true
+    ), $config);
+
+    $round: map-get($config, round);
+
+    @if $round {
+        @include elr-thumbnail(
+            $config: (
+                width: 80px,
+                height: 80px,
+                border-radius: round
+            )
+        );
+    } @else {
+        @include elr-thumbnail(
+            $config: (
+                width: 60px,
+                height: 60px
+            )
+        );
+    }
+
+    margin-right: to-rems(20px);
+    padding: 0;
+}
+
+@mixin elr-card-centered() {
+    text-align: center;
+
+    .elr-header-content { display: block; }
+
+    .elr-card-thumbnail {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+
+        + h2 {
+            padding-top: to-rems(10px);
+            clear: both;
+        }
+    }
+
+    .elr-card-actions { justify-content: center; }
+}
