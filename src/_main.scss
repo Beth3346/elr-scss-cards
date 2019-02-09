@@ -1,0 +1,281 @@
+// scss-lint:disable NestingDepth
+
+@import 'node_modules/elr-scss-functions/main';
+@import 'node_modules/elr-scss-buttons/src/buttons';
+
+@mixin elr-clearfix() {
+  &::after,
+  &::before {
+    content: '';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+
+@mixin elr-card($config: ()) {
+  $config: extend(
+    (
+      bg-color: #fff,
+      color: #333,
+      border-color: null,
+      margin: 0,
+      border-radius: 0,
+      shadow: true
+    ),
+    $config
+  );
+
+  $bg-color: map-get($config, bg-color);
+  $color: map-get($config, color);
+  $border-color: map-get($config, border-color);
+  $margin: map-get($config, margin);
+  $border-radius: map-get($config, border-radius);
+  $shadow: map-get($config, shadow);
+
+  background-color: $bg-color;
+  color: $color;
+  max-width: 100%;
+  height: auto;
+  margin: to-rems($margin);
+
+  @if ($shadow) {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1), -1px -1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  @if $border-radius {
+    border-radius: $border-radius;
+  }
+
+  @if $border-color {
+    border: 1px solid $border-color;
+  }
+
+  .elr-card-inner {
+    justify-content: space-between;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .elr-header-content {
+    padding: 20px;
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .elr-card-full-image {
+    margin: 0;
+    padding: 0;
+  }
+
+  .elr-card-header {
+    figure {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .elr-card-full-image + .elr-header-content {
+      padding-top: 0;
+    }
+
+    @if $border-radius {
+      .elr-card-full-image {
+        padding: 0;
+      }
+
+      .elr-card-full-image,
+      .elr-card-full-image img {
+        border-radius: $border-radius $border-radius 0 0;
+      }
+    }
+  }
+
+  .elr-card-title {
+    font-size: 26px;
+    color: $color;
+    font-weight: 700;
+    width: 100%;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.3s;
+
+      &:hover {
+        color: lighten($color, 10%);
+      }
+    }
+  }
+
+  .elr-card-subtitle {
+    font-size: 14px;
+    color: lighten($color, 10%);
+    padding: 0 0 10px;
+    width: 100%;
+  }
+
+  figure {
+    width: 100%;
+  }
+
+  p {
+    font-size: 14px;
+    color: $color;
+    padding: 5px 0;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    font-size: 14px;
+    padding: 5px 0;
+  }
+
+  .elr-card-list-label {
+    font-size: 110%;
+    font-weight: 700;
+    padding-right: 5px;
+  }
+
+  .elr-card-content {
+    padding: 10px 20px;
+  }
+
+  .elr-card-body {
+    clear: both;
+    flex-grow: 2;
+  }
+
+  .elr-card-body,
+  .elr-card-footer {
+    @include elr-clearfix;
+
+    figure {
+      margin: 20px;
+      width: auto;
+
+      &.elr-card-full-image {
+        margin: 0 0 -6px;
+      }
+    }
+  }
+
+  .elr-card-footer {
+    @include elr-clearfix;
+    padding: 20px;
+    border-top: 1px solid darken($bg-color, 10%);
+
+    @if $border-radius {
+      .elr-card-full-image,
+      .elr-card-full-image img {
+        border-radius: 0 0 $border-radius $border-radius;
+      }
+    }
+  }
+
+  .elr-button {
+    @include elr-clearfix;
+    @include elr-button;
+    font-size: 14px;
+  }
+
+  .elr-card-actions {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+
+    .elr-button,
+    form {
+      width: 50%;
+      display: inline-block;
+      flex-basis: 0;
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin-right: 10px;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &:nth-child(even) {
+        margin-right: 0;
+        margin-left: 10px;
+      }
+
+      &:only-of-type {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 200px;
+      }
+    }
+
+    form [type='submit'] {
+      width: 100%;
+    }
+  }
+}
+
+@mixin elr-card-thumbnail($config: ()) {
+  $config: extend(
+    (
+      round: true
+    ),
+    $config
+  );
+
+  $round: map-get($config, round);
+
+  @if $round {
+    @include elr-thumbnail(
+      $config: (
+        width: 80px,
+        height: 80px,
+        border-radius: round
+      )
+    );
+  } @else {
+    @include elr-thumbnail(
+      $config: (
+        width: 60px,
+        height: 60px
+      )
+    );
+  }
+
+  margin-right: to-rems(20px);
+  padding: 0;
+}
+
+@mixin elr-card-centered() {
+  text-align: center;
+
+  .elr-header-content {
+    display: block;
+  }
+
+  .elr-card-thumbnail {
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+
+    + h2 {
+      padding-top: to-rems(10px);
+      clear: both;
+    }
+  }
+
+  .elr-card-actions {
+    justify-content: center;
+  }
+}
