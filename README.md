@@ -12,6 +12,7 @@ Download node at [nodejs.org](http://nodejs.org) and install it, if you haven't 
 
 ```sh
 npm install elr-scss-cards --save
+yarn add elr-scss-cards
 ```
 
 ## License
