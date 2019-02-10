@@ -13,7 +13,7 @@
 }
 
 .elr-card {
-  @include elr-card();
+  @include elr-card;
 }
 
 .elr-card-border {
@@ -33,4 +33,8 @@
       border-radius: 5px
     )
   );
+}
+
+.elr-card-centered {
+  @include elr-card-centered;
 }

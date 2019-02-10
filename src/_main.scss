@@ -15,6 +15,44 @@
   }
 }
 
+@mixin elr-thumbnail($config: ()) {
+  $config: extend(
+    (
+      width: 100px,
+      height: 100px,
+      border-radius: 0
+    ),
+    $config
+  );
+
+  $width: map-get($config, width);
+  $height: map-get($config, height);
+  $border-radius: map-get($config, border-radius);
+
+  @if ($border-radius == 'round') {
+    border-radius: ($width / 2);
+  } @else {
+    border-radius: $border-radius;
+  }
+
+  overflow: hidden;
+  border: 3px solid #fff;
+  box-shadow: #999 0 0 0 1px;
+  width: $width;
+  height: $height;
+  display: block;
+  text-align: center;
+  position: relative;
+
+  img {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+    width: auto;
+  }
+}
+
 @mixin elr-card($config: ()) {
   $config: extend(
     (
@@ -121,11 +159,11 @@
   .elr-card-subtitle {
     font-size: 14px;
     color: lighten($color, 10%);
-    padding: 0 0 10px;
+    padding: 0;
     width: 100%;
   }
 
-  figure {
+  .elr-card-image {
     width: 100%;
   }
 
@@ -152,6 +190,11 @@
 
   .elr-card-content {
     padding: 10px 20px;
+
+    > :first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
   }
 
   .elr-card-body {
@@ -224,31 +267,51 @@
       width: 100%;
     }
   }
+
+  .elr-card-thumbnail {
+    @include elr-card-thumbnail(
+      $config: (
+        border-radius: $border-radius
+      )
+    );
+    margin-right: 20px;
+  }
+
+  .elr-card-thumbnail-round {
+    @include elr-card-thumbnail(
+      $config: (
+        round: true
+      )
+    );
+  }
 }
 
 @mixin elr-card-thumbnail($config: ()) {
   $config: extend(
     (
-      round: true
+      round: false,
+      border-radius: 3px
     ),
     $config
   );
 
   $round: map-get($config, round);
+  $border-radius: map-get($config, border-radius);
 
   @if $round {
     @include elr-thumbnail(
       $config: (
-        width: 80px,
-        height: 80px,
-        border-radius: round
+        width: 70px,
+        height: 70px,
+        border-radius: 'round'
       )
     );
   } @else {
     @include elr-thumbnail(
       $config: (
         width: 60px,
-        height: 60px
+        height: 60px,
+        border-radius: $border-radius
       )
     );
   }
@@ -264,7 +327,8 @@
     display: block;
   }
 
-  .elr-card-thumbnail {
+  .elr-card-thumbnail,
+  .elr-card-thumbnail-round {
     margin-left: auto;
     margin-right: auto;
     float: none;
