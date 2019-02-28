@@ -29,7 +29,7 @@
     "url": "https://github.com/Beth3346/elr-scss-cards.git"
   },
   "dependencies": {
-    "elr-scss-buttons": "^0.0.1",
+    "elr-scss-buttons": "^0.0.2",
     "elr-scss-functions": "0.1.2"
   },
   "husky": {
