@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const path = require('path');
 const sass = require('gulp-sass');
-const scsslint = require('gulp-scss-lint');
+// const scsslint = require('gulp-scss-lint');
 const plumber = require('gulp-plumber');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
@@ -38,9 +38,36 @@ function clean() {
 // Watch files
 function watchFiles(done) {
   gulp.watch(['./**/*.scss', 'dist/index.html'], () => {
-    return gulp
+    return (
+      gulp
+        .src('./*.scss')
+        // .pipe(scsslint())
+        .pipe(plumber())
+        .pipe(
+          sass({
+            includePaths: ['node_modules']
+          }).on('error', sass.logError)
+        )
+        .pipe(gulp.dest(paths.css))
+        .pipe(
+          autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: false
+          })
+        )
+        .pipe(gulp.dest(paths.css))
+        .pipe(cleanCSS({ debug: true }))
+        .pipe(gulp.dest(paths.css))
+        .pipe(browserSyncReload(done))
+    );
+  });
+}
+
+gulp.task('default', () => {
+  return (
+    gulp
       .src('./*.scss')
-      .pipe(scsslint())
+      // .pipe(scsslint())
       .pipe(plumber())
       .pipe(
         sass({
@@ -57,30 +84,7 @@ function watchFiles(done) {
       .pipe(gulp.dest(paths.css))
       .pipe(cleanCSS({ debug: true }))
       .pipe(gulp.dest(paths.css))
-      .pipe(browserSyncReload(done));
-  });
-}
-
-gulp.task('default', () => {
-  return gulp
-    .src('./*.scss')
-    .pipe(scsslint())
-    .pipe(plumber())
-    .pipe(
-      sass({
-        includePaths: ['node_modules']
-      }).on('error', sass.logError)
-    )
-    .pipe(gulp.dest(paths.css))
-    .pipe(
-      autoprefixer({
-        browsers: ['last 3 versions'],
-        cascade: false
-      })
-    )
-    .pipe(gulp.dest(paths.css))
-    .pipe(cleanCSS({ debug: true }))
-    .pipe(gulp.dest(paths.css));
+  );
 });
 
 const watch = gulp.parallel(watchFiles, browserSync);
