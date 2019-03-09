@@ -1,6 +1,6 @@
 {
   "name": "elr-scss-cards",
-  "description": "a scss mixin for cardss",
+  "description": "a scss mixin for cards",
   "version": "0.0.3",
   "author": "Elizabeth Rogers",
   "bugs": {
@@ -8,6 +8,8 @@
     "email": "beth3346@gmail.com"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "del": "^4.0.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-clean-css": "^4.0.0",
