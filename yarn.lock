@@ -1113,10 +1113,10 @@ electron-to-chromium@^1.3.103:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.113.tgz#b1ccf619df7295aea17bc6951dc689632629e4a9"
   integrity sha512-De+lPAxEcpxvqPTyZAXELNpRZXABRxf+uL/rSykstQhzj/B0l1150G/ExIIxKc16lI89Hgz81J0BHAcbTqK49g==
 
-elr-scss-buttons@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/elr-scss-buttons/-/elr-scss-buttons-0.0.1.tgz#87afded53fa55b72fa2a6072af0ca3ab6d7f212e"
-  integrity sha512-onpby3VbSUYPsChLJYE88tovL3bhx6sDBh22ewoHAJT2CCqcLD1+C+HIN2AxdE22OvHj+5trsnqo11cNBWV9LA==
+elr-scss-buttons@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/elr-scss-buttons/-/elr-scss-buttons-0.0.4.tgz#1b33492a366891ee91f047c5fd6a94da1725293b"
+  integrity sha512-lVq5q34cTNPlEInW/k5wRQG1oByIklzyYWlrArEoipuWgtedGapy8sM58kK5XPqrUZM8KcutPPBOSZPG4xR+Yw==
   dependencies:
     elr-scss-functions "0.1.2"
 
