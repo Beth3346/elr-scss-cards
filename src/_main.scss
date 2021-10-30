@@ -1,12 +1,12 @@
 // scss-lint:disable NestingDepth
-
-@import 'node_modules/elr-scss-functions/main';
-@import 'node_modules/elr-scss-buttons/src/buttons';
+@use "sass:math";
+@import "node_modules/elr-scss-functions/main";
+@import "node_modules/elr-scss-buttons/src/buttons";
 
 @mixin elr-clearfix() {
   &::after,
   &::before {
-    content: '';
+    content: "";
     display: table;
   }
 
@@ -20,7 +20,7 @@
     (
       width: 100px,
       height: 100px,
-      border-radius: 0
+      border-radius: 0,
     ),
     $config
   );
@@ -29,8 +29,8 @@
   $height: map-get($config, height);
   $border-radius: map-get($config, border-radius);
 
-  @if ($border-radius == 'round') {
-    border-radius: ($width / 2);
+  @if ($border-radius == "round") {
+    border-radius: math.div($width, 2);
   } @else {
     border-radius: $border-radius;
   }
@@ -61,7 +61,7 @@
       border-color: null,
       margin: 0,
       border-radius: 0,
-      shadow: true
+      shadow: true,
     ),
     $config
   );
@@ -263,7 +263,7 @@
       }
     }
 
-    form [type='submit'] {
+    form [type="submit"] {
       width: 100%;
     }
   }
@@ -271,7 +271,7 @@
   .elr-card-thumbnail {
     @include elr-card-thumbnail(
       $config: (
-        border-radius: $border-radius
+        border-radius: $border-radius,
       )
     );
     margin-right: 20px;
@@ -280,7 +280,7 @@
   .elr-card-thumbnail-round {
     @include elr-card-thumbnail(
       $config: (
-        round: true
+        round: true,
       )
     );
   }
@@ -290,7 +290,7 @@
   $config: extend(
     (
       round: false,
-      border-radius: 3px
+      border-radius: 3px,
     ),
     $config
   );
@@ -303,7 +303,7 @@
       $config: (
         width: 70px,
         height: 70px,
-        border-radius: 'round'
+        border-radius: "round",
       )
     );
   } @else {
@@ -311,7 +311,7 @@
       $config: (
         width: 60px,
         height: 60px,
-        border-radius: $border-radius
+        border-radius: $border-radius,
       )
     );
   }
