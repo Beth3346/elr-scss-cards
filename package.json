@@ -7,18 +7,25 @@
     "url": "https://github.com/Beth3346/elr-scss-cards",
     "email": "beth3346@gmail.com"
   },
+  "scripts": {
+    "build": "gulp clean && gulp",
+    "prepare": "husky install",
+    "test": "gulp clean && gulp && gulp clean",
+    "update": "ncu",
+    "update:install": "ncu -u && npm install",
+    "publish": "np"
+  },
   "devDependencies": {
-    "browser-sync": "^2.26.3",
-    "del": "^4.0.0",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^6.0.0",
-    "gulp-clean-css": "^4.0.0",
-    "gulp-plumber": "^1.2.0",
-    "gulp-sass": "^4.0.1",
-    "gulp-scss-lint": "^1.0.0",
-    "husky": "^1.0.0-rc.2",
-    "node-sass": "^4.5.0",
-    "path": "^0.12.7"
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^5.0.0",
+    "husky": "^7.0.0",
+    "np": "^7.5.0",
+    "npm-check-updates": "^11.8.5",
+    "sass": "^1.43.4"
   },
   "homepage": "http://www.elizabeth-rogers.com/elr-utilities/css.html",
   "keywords": [
@@ -33,13 +40,5 @@
   "dependencies": {
     "elr-scss-buttons": "^0.0.1",
     "elr-scss-functions": "0.1.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "gulp"
-    }
-  },
-  "resolutions": {
-    "natives": "1.1.3"
   }
 }
