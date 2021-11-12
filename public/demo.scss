@@ -1,0 +1,71 @@
+@import "src/main";
+@import "elr-scss-reset/src/main";
+
+@include elr-reset;
+
+.wrapper {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.main-heading {
+  font-size: 36px;
+  font-weight: 700;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.subheading {
+  font-size: 16px;
+  color: #666;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.demo-content {
+  position: relative;
+  padding: 20px 0;
+}
+
+.card-holder {
+  display: flex;
+  flex-wrap: wrap;
+
+  > div {
+    flex: 1;
+    margin: 20px;
+    min-width: 300px;
+    max-width: 50%;
+  }
+}
+
+.elr-card {
+  @include elr-card;
+}
+
+.elr-card-border {
+  @include elr-card(
+    $config: (
+      border-color: #333,
+      shadow: false,
+    )
+  );
+}
+
+.elr-card-rounded {
+  @include elr-card(
+    $config: (
+      border-color: #333,
+      shadow: false,
+      border-radius: 5px,
+    )
+  );
+}
+
+.elr-card-centered {
+  @include elr-card-centered;
+}
