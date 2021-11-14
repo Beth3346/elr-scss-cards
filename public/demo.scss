@@ -1,7 +1,22 @@
 @import "src/main";
 @import "elr-scss-reset/src/main";
+@import "elr-scss-helpers/src/main";
 
 @include elr-reset;
+
+$box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1), -1px -1px 5px rgba(0, 0, 0, 0.1);
+$primary-color: #1976d2;
+$accent-color: f81190;
+$button-color: #1976d2;
+$danger-color: #af100d;
+$warning-color: #ca9626;
+$success-color: #337234;
+$info-color: #1976d2;
+$muted-color: #999;
+
+* {
+  font-family: Roboto;
+}
 
 .wrapper {
   max-width: 1000px;
@@ -36,12 +51,39 @@
   flex-wrap: wrap;
 
   > div {
-    flex: 1;
+    // flex: 1;
+    flex-basis: calc(50% - 20px);
     margin: 20px;
-    min-width: 300px;
-    max-width: 50%;
+
+    &:nth-of-type(odd) {
+      margin-left: 0;
+    }
+
+    &:nth-of-type(even) {
+      margin-right: 0;
+    }
+    // min-width: 300px;
+    // max-width: 50%;
   }
 }
+
+@include elr-button-classes(
+  $config: (
+    background-color: $button-color,
+    border-radius: $border-radius,
+  )
+);
+
+@include elr-buttons-action(
+  $config: (
+    danger-color: $danger-color,
+    warning-color: $warning-color,
+    success-color: $success-color,
+    info-color: $info-color,
+    muted-color: $muted-color,
+    accent-color: $accent-color,
+  )
+);
 
 .elr-card {
   @include elr-card;
@@ -50,8 +92,8 @@
 .elr-card-border {
   @include elr-card(
     $config: (
-      border-color: #333,
-      shadow: false,
+      border-color: #ccc,
+      shadow: none,
     )
   );
 }
@@ -59,8 +101,8 @@
 .elr-card-rounded {
   @include elr-card(
     $config: (
-      border-color: #333,
-      shadow: false,
+      border-color: #ccc,
+      shadow: none,
       border-radius: 5px,
     )
   );

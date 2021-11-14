@@ -1,26 +1,18 @@
 // scss-lint:disable NestingDepth
 @use "sass:math";
 @import "elr-scss-functions/src/main";
-@import "node_modules/elr-scss-buttons/src/buttons";
 
-@mixin elr-clearfix() {
-  &::after,
-  &::before {
-    content: "";
-    display: table;
-  }
-
-  &::after {
-    clear: both;
-  }
-}
+$box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
+$primary-color: #1976d2;
+$accent-color: rgb(240, 44, 151);
 
 @mixin elr-thumbnail($config: ()) {
   $config: extend(
     (
-      width: 100px,
-      height: 100px,
+      width: 160px,
+      height: 160px,
       border-radius: 0,
+      image-placement: center,
     ),
     $config
   );
@@ -28,6 +20,7 @@
   $width: map-get($config, width);
   $height: map-get($config, height);
   $border-radius: map-get($config, border-radius);
+  $image-placement: map-get($config, image-placement);
 
   @if ($border-radius == "round") {
     border-radius: math.div($width, 2);
@@ -36,8 +29,8 @@
   }
 
   overflow: hidden;
-  border: 3px solid #fff;
-  box-shadow: #999 0 0 0 1px;
+  // border: 3px solid #fff;
+  // box-shadow: #999 0 0 0 1px;
   width: $width;
   height: $height;
   display: block;
@@ -56,31 +49,35 @@
 @mixin elr-card($config: ()) {
   $config: extend(
     (
-      bg-color: #fff,
-      color: #333,
-      border-color: null,
+      background-color: #fff,
+      accent-color: $primary-color,
+      color: #111,
+      border-color: none,
       margin: 0,
-      border-radius: 0,
-      shadow: true,
+      border-radius: 3px,
+      shadow: $box-shadow,
+      image-placement: center,
     ),
     $config
   );
 
-  $bg-color: map-get($config, bg-color);
+  $background-color: map-get($config, background-color);
   $color: map-get($config, color);
+  $accent-color: map-get($config, accent-color);
   $border-color: map-get($config, border-color);
   $margin: map-get($config, margin);
   $border-radius: map-get($config, border-radius);
   $shadow: map-get($config, shadow);
+  $image-placement: map-get($config, image-placement);
 
-  background-color: $bg-color;
+  background-color: $background-color;
   color: $color;
   max-width: 100%;
   height: auto;
-  margin: to-rems($margin);
+  margin: $margin;
 
   @if ($shadow) {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1), -1px -1px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: $shadow;
   }
 
   @if $border-radius {
@@ -100,16 +97,18 @@
   }
 
   .elr-header-content {
-    padding: 20px;
-    padding-bottom: 0;
+    padding: 16px;
+    // padding-bottom: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    border-bottom: 1px solid $border-color;
   }
 
   img {
     width: 100%;
     height: auto;
+    border-radius: $border-radius;
   }
 
   .elr-card-full-image {
@@ -120,7 +119,11 @@
   .elr-card-header {
     figure {
       margin-top: 0;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+    }
+
+    figure.elr-card-thumbnail {
+      margin-bottom: 0;
     }
 
     .elr-card-full-image + .elr-header-content {
@@ -140,9 +143,9 @@
   }
 
   .elr-card-title {
-    font-size: 26px;
-    color: $color;
-    font-weight: 700;
+    font-size: 30px;
+    color: $accent-color;
+    font-weight: 900;
     width: 100%;
 
     a {
@@ -151,15 +154,17 @@
       transition: color 0.3s;
 
       &:hover {
-        color: lighten($color, 10%);
+        color: lighten($accent-color, 10%);
       }
     }
   }
 
   .elr-card-subtitle {
     font-size: 14px;
-    color: lighten($color, 10%);
+    font-weight: 400;
+    color: $accent-color;
     padding: 0;
+    margin: -4px 0 0;
     width: 100%;
   }
 
@@ -168,28 +173,30 @@
   }
 
   p {
-    font-size: 14px;
+    font-size: 16px;
     color: $color;
-    padding: 5px 0;
+    padding: 4px 0;
   }
 
   ul {
-    list-style: none;
+    // list-style: none;
+    margin: 8px;
+    list-style-position: inside;
   }
 
   li {
-    font-size: 14px;
-    padding: 5px 0;
+    font-size: 16px;
+    padding: 4px 0;
   }
 
   .elr-card-list-label {
     font-size: 110%;
     font-weight: 700;
-    padding-right: 5px;
+    padding-right: 4px;
   }
 
   .elr-card-content {
-    padding: 10px 20px;
+    padding: 16px;
 
     > :first-child {
       margin-top: 0;
@@ -200,14 +207,13 @@
   .elr-card-body {
     clear: both;
     flex-grow: 2;
+    line-height: 1.5;
   }
 
   .elr-card-body,
   .elr-card-footer {
-    @include elr-clearfix;
-
     figure {
-      margin: 20px;
+      margin: 16px;
       width: auto;
 
       &.elr-card-full-image {
@@ -217,9 +223,8 @@
   }
 
   .elr-card-footer {
-    @include elr-clearfix;
-    padding: 20px;
-    border-top: 1px solid darken($bg-color, 10%);
+    padding: 16px;
+    border-top: 1px solid $border-color;
 
     @if $border-radius {
       .elr-card-full-image,
@@ -229,11 +234,10 @@
     }
   }
 
-  .elr-button {
-    @include elr-clearfix;
-    @include elr-button;
-    font-size: 14px;
-  }
+  // .elr-button {
+  //   // @include elr-button;
+  //   font-size: 14px;
+  // }
 
   .elr-card-actions {
     display: flex;
@@ -242,24 +246,21 @@
 
     .elr-button,
     form {
-      width: 50%;
-      display: inline-block;
       flex-basis: 0;
       flex-grow: 1;
       flex-shrink: 1;
-      margin-right: 10px;
-      margin-top: 0;
-      margin-bottom: 0;
+      margin: 0 8px 0 0;
+      min-width: 0;
 
       &:nth-child(even) {
         margin-right: 0;
-        margin-left: 10px;
+        margin-left: 8px;
       }
 
       &:only-of-type {
         margin-left: 0;
         margin-right: 0;
-        max-width: 200px;
+        // max-width: 200px;
       }
     }
 
@@ -274,7 +275,7 @@
         border-radius: $border-radius,
       )
     );
-    margin-right: 20px;
+    margin-right: 16px;
   }
 
   .elr-card-thumbnail-round {
@@ -301,8 +302,8 @@
   @if $round {
     @include elr-thumbnail(
       $config: (
-        width: 70px,
-        height: 70px,
+        width: 100px,
+        height: 100px,
         border-radius: "round",
       )
     );
@@ -316,7 +317,7 @@
     );
   }
 
-  margin-right: to-rems(20px);
+  margin-right: 16px;
   padding: 0;
 }
 
@@ -327,15 +328,19 @@
     display: block;
   }
 
+  .elr-card-header {
+    figure {
+      margin-bottom: 16px;
+    }
+  }
+
   .elr-card-thumbnail,
   .elr-card-thumbnail-round {
     margin-left: auto;
     margin-right: auto;
-    float: none;
 
-    + h2 {
-      padding-top: to-rems(10px);
-      clear: both;
+    + .elr-card-title {
+      padding-top: 16px;
     }
   }
 
