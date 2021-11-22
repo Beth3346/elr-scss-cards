@@ -1,10 +1,9 @@
 // scss-lint:disable NestingDepth
 @use "sass:math";
 @import "elr-scss-functions/src/main";
+@import "elr-scss-config/src/main";
 
 $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
-$primary-color: #1976d2;
-$accent-color: rgb(240, 44, 151);
 
 @mixin elr-thumbnail($config: ()) {
   $config: extend(
@@ -49,12 +48,12 @@ $accent-color: rgb(240, 44, 151);
 @mixin elr-card($config: ()) {
   $config: extend(
     (
-      background-color: #fff,
+      background-color: $white,
       accent-color: $primary-color,
-      color: #111,
+      color: $text-color,
       border-color: none,
       margin: 0,
-      border-radius: 3px,
+      border-radius: $border-radius,
       shadow: $box-shadow,
       image-placement: center,
     ),
@@ -97,12 +96,15 @@ $accent-color: rgb(240, 44, 151);
   }
 
   .elr-header-content {
-    padding: 16px;
+    padding: $base-fontsize;
     // padding-bottom: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    border-bottom: 1px solid $border-color;
+
+    @if $border-color {
+      border-bottom: 1px solid $border-color;
+    }
   }
 
   img {
@@ -173,7 +175,7 @@ $accent-color: rgb(240, 44, 151);
   }
 
   p {
-    font-size: 16px;
+    font-size: $base-fontsize;
     color: $color;
     padding: 4px 0;
   }
@@ -185,7 +187,7 @@ $accent-color: rgb(240, 44, 151);
   }
 
   li {
-    font-size: 16px;
+    font-size: $base-fontsize;
     padding: 4px 0;
   }
 
@@ -196,7 +198,7 @@ $accent-color: rgb(240, 44, 151);
   }
 
   .elr-card-content {
-    padding: 16px;
+    padding: $base-fontsize;
 
     > :first-child {
       margin-top: 0;
@@ -213,7 +215,7 @@ $accent-color: rgb(240, 44, 151);
   .elr-card-body,
   .elr-card-footer {
     figure {
-      margin: 16px;
+      margin: $base-fontsize;
       width: auto;
 
       &.elr-card-full-image {
@@ -223,8 +225,11 @@ $accent-color: rgb(240, 44, 151);
   }
 
   .elr-card-footer {
-    padding: 16px;
-    border-top: 1px solid $border-color;
+    padding: $base-fontsize;
+
+    @if ($border-color) {
+      border-top: 1px solid $border-color;
+    }
 
     @if $border-radius {
       .elr-card-full-image,
@@ -275,7 +280,7 @@ $accent-color: rgb(240, 44, 151);
         border-radius: $border-radius,
       )
     );
-    margin-right: 16px;
+    margin-right: $base-fontsize;
   }
 
   .elr-card-thumbnail-round {
@@ -317,7 +322,7 @@ $accent-color: rgb(240, 44, 151);
     );
   }
 
-  margin-right: 16px;
+  margin-right: $base-fontsize;
   padding: 0;
 }
 
@@ -330,7 +335,7 @@ $accent-color: rgb(240, 44, 151);
 
   .elr-card-header {
     figure {
-      margin-bottom: 16px;
+      margin-bottom: $base-fontsize;
     }
   }
 
@@ -340,7 +345,7 @@ $accent-color: rgb(240, 44, 151);
     margin-right: auto;
 
     + .elr-card-title {
-      padding-top: 16px;
+      padding-top: $base-fontsize;
     }
   }
 
