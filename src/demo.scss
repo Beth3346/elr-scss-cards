@@ -1,18 +1,9 @@
 @import "src/main";
 @import "elr-scss-reset/src/main";
+@import "elr-scss-config/src/main";
 @import "elr-scss-helpers/src/main";
 
 @include elr-reset;
-
-$box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1), -1px -1px 5px rgba(0, 0, 0, 0.1);
-$primary-color: #1976d2;
-$accent-color: #f81190;
-$button-color: #1976d2;
-$danger-color: #af100d;
-$warning-color: #ca9626;
-$success-color: #337234;
-$info-color: #1976d2;
-$muted-color: #999;
 
 * {
   font-family: Roboto;
@@ -21,29 +12,29 @@ $muted-color: #999;
 .wrapper {
   max-width: 1000px;
   margin: auto;
-  padding: 20px;
+  padding: $base-fontsize * 1.5;
 }
 
 .main-heading {
-  font-size: 36px;
+  font-size: $base-fontsize * 2;
   font-weight: 700;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+  border-bottom: $border;
+  padding-bottom: $base-fontsize * 0.5;
+  margin-bottom: $base-fontsize;
   width: 100%;
 }
 
 .subheading {
-  font-size: 16px;
-  color: #666;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+  font-size: $base-fontsize * 1.25;
+  color: $primary-color;
+  padding-bottom: $base-fontsize * 0.5;
+  margin-bottom: $base-fontsize;
   width: 100%;
 }
 
 .demo-content {
   position: relative;
-  padding: 20px 0;
+  padding: $base-fontsize * 1.5 0;
 }
 
 .card-holder {
@@ -52,8 +43,8 @@ $muted-color: #999;
 
   > div {
     // flex: 1;
-    flex-basis: calc(50% - 20px);
-    margin: 20px;
+    flex-basis: calc(50% - $base-fontsize * 1.5);
+    margin: $base-fontsize * 1.5;
 
     &:nth-of-type(odd) {
       margin-left: 0;
@@ -85,29 +76,29 @@ $muted-color: #999;
   )
 );
 
-.elr-card {
+.card {
   @include elr-card;
 }
 
-.elr-card-border {
+.card-border {
   @include elr-card(
     $config: (
-      border-color: #ccc,
+      border-color: $light-gray,
       shadow: none,
     )
   );
 }
 
-.elr-card-rounded {
+.card-rounded {
   @include elr-card(
     $config: (
-      border-color: #ccc,
+      border-color: $light-gray,
       shadow: none,
-      border-radius: 5px,
+      border-radius: $base-fontsize * 0.5,
     )
   );
 }
 
-.elr-card-centered {
+.card-centered {
   @include elr-card-centered;
 }

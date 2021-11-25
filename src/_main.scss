@@ -1,5 +1,4 @@
 // scss-lint:disable NestingDepth
-@use "sass:math";
 @import "elr-scss-functions/src/main";
 @import "elr-scss-config/src/main";
 
@@ -22,14 +21,12 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
   $image-placement: map-get($config, image-placement);
 
   @if ($border-radius == "round") {
-    border-radius: math.div($width, 2);
+    border-radius: $width * 0.5;
   } @else {
     border-radius: $border-radius;
   }
 
   overflow: hidden;
-  // border: 3px solid #fff;
-  // box-shadow: #999 0 0 0 1px;
   width: $width;
   height: $height;
   display: block;
@@ -87,7 +84,7 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     border: 1px solid $border-color;
   }
 
-  .elr-card-inner {
+  .card-inner {
     justify-content: space-between;
     height: 100%;
     display: flex;
@@ -95,7 +92,7 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     align-items: stretch;
   }
 
-  .elr-header-content {
+  .header-content {
     padding: $base-fontsize;
     // padding-bottom: 0;
     display: flex;
@@ -113,38 +110,38 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     border-radius: $border-radius;
   }
 
-  .elr-card-full-image {
+  .card-full-image {
     margin: 0;
     padding: 0;
   }
 
-  .elr-card-header {
+  .card-header {
     figure {
       margin-top: 0;
       margin-bottom: 8px;
     }
 
-    figure.elr-card-thumbnail {
+    figure.card-thumbnail {
       margin-bottom: 0;
     }
 
-    .elr-card-full-image + .elr-header-content {
+    .card-full-image + .header-content {
       padding-top: 0;
     }
 
     @if $border-radius {
-      .elr-card-full-image {
+      .card-full-image {
         padding: 0;
       }
 
-      .elr-card-full-image,
-      .elr-card-full-image img {
+      .card-full-image,
+      .card-full-image img {
         border-radius: $border-radius $border-radius 0 0;
       }
     }
   }
 
-  .elr-card-title {
+  .card-title {
     font-size: 30px;
     color: $accent-color;
     font-weight: 900;
@@ -161,7 +158,7 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     }
   }
 
-  .elr-card-subtitle {
+  .card-subtitle {
     font-size: 14px;
     font-weight: 400;
     color: $accent-color;
@@ -170,7 +167,7 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     width: 100%;
   }
 
-  .elr-card-image {
+  .card-image {
     width: 100%;
   }
 
@@ -191,13 +188,13 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     padding: 4px 0;
   }
 
-  .elr-card-list-label {
+  .card-list-label {
     font-size: 110%;
     font-weight: 700;
     padding-right: 4px;
   }
 
-  .elr-card-content {
+  .card-content {
     padding: $base-fontsize;
 
     > :first-child {
@@ -206,25 +203,25 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     }
   }
 
-  .elr-card-body {
+  .card-body {
     clear: both;
     flex-grow: 2;
     line-height: 1.5;
   }
 
-  .elr-card-body,
-  .elr-card-footer {
+  .card-body,
+  .card-footer {
     figure {
       margin: $base-fontsize;
       width: auto;
 
-      &.elr-card-full-image {
+      &.card-full-image {
         margin: 0 0 -6px;
       }
     }
   }
 
-  .elr-card-footer {
+  .card-footer {
     padding: $base-fontsize;
 
     @if ($border-color) {
@@ -232,24 +229,25 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     }
 
     @if $border-radius {
-      .elr-card-full-image,
-      .elr-card-full-image img {
+      .card-full-image,
+      .card-full-image img {
         border-radius: 0 0 $border-radius $border-radius;
       }
     }
   }
 
-  // .elr-button {
-  //   // @include elr-button;
+  // .button {
+  //   // @include button;
   //   font-size: 14px;
   // }
 
-  .elr-card-actions {
+  .card-actions {
     display: flex;
     justify-content: space-between;
     flex: 1;
 
-    .elr-button,
+    button,
+    a,
     form {
       flex-basis: 0;
       flex-grow: 1;
@@ -274,7 +272,7 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     }
   }
 
-  .elr-card-thumbnail {
+  .card-thumbnail {
     @include elr-card-thumbnail(
       $config: (
         border-radius: $border-radius,
@@ -283,7 +281,7 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
     margin-right: $base-fontsize;
   }
 
-  .elr-card-thumbnail-round {
+  .card-thumbnail-round {
     @include elr-card-thumbnail(
       $config: (
         round: true,
@@ -329,27 +327,27 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
 @mixin elr-card-centered() {
   text-align: center;
 
-  .elr-header-content {
+  .header-content {
     display: block;
   }
 
-  .elr-card-header {
+  .card-header {
     figure {
       margin-bottom: $base-fontsize;
     }
   }
 
-  .elr-card-thumbnail,
-  .elr-card-thumbnail-round {
+  .card-thumbnail,
+  .card-thumbnail-round {
     margin-left: auto;
     margin-right: auto;
 
-    + .elr-card-title {
+    + .card-title {
       padding-top: $base-fontsize;
     }
   }
 
-  .elr-card-actions {
+  .card-actions {
     justify-content: center;
   }
 }
