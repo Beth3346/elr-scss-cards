@@ -38,7 +38,7 @@
     "elr-scss-config": "^1.1.2",
     "elr-scss-functions": "1.1.6",
     "elr-scss-helpers": "^0.0.12",
-    "elr-scss-reset": "^0.0.7"
+    "elr-scss-reset": "^0.0.8"
   },
   "np": {
     "yarn": false,
