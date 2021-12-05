@@ -49,7 +49,6 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
       accent-color: $primary-color,
       color: $text-color,
       border-color: none,
-      margin: 0,
       border-radius: $border-radius,
       shadow: $shadow,
       image-placement: center,
@@ -61,16 +60,15 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
   $color: map-get($config, color);
   $accent-color: map-get($config, accent-color);
   $border-color: map-get($config, border-color);
-  $margin: map-get($config, margin);
   $border-radius: map-get($config, border-radius);
   $shadow: map-get($config, shadow);
   $image-placement: map-get($config, image-placement);
 
   background-color: $background-color;
   color: $color;
+  width: 100%;
   max-width: 100%;
   height: auto;
-  margin: $margin;
 
   @if ($shadow) {
     box-shadow: $shadow;
@@ -94,7 +92,6 @@ $box-shadow: 1px 1px4 rgba(0, 0, 0, 0.1), -1px -1px4 rgba(0, 0, 0, 0.1);
 
   .header-content {
     padding: $base-fontsize;
-    // padding-bottom: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
