@@ -4,8 +4,12 @@
 [![CI](https://github.com/Beth3346/elr-scss-cards/actions/workflows/node.js.yml/badge.svg)](https://github.com/Beth3346/elr-scss-cards/actions/workflows/node.js.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/dm/elr-scss-cards.svg?style=flat)](https://www.npmjs.com/package/elr-scss-cards)
+[![last commit](https://img.shields.io/github/last-commit/Beth3346/elr-scss-cards.svg)](https://github.com/Beth3346/elr-scss-cards)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f890da8d-40c3-4c09-aac2-9cc79c75ffea/deploy-status)](https://app.netlify.com/sites/elr-cards/deploys)
 
 a library of sass mixins
+
+[View Demo](https://elr-cards.netlify.app/)
 
 ## Installation
 
